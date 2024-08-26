@@ -12,6 +12,7 @@ import { selectAuth } from '@/redux/auth/selectors';
 import LoginForm from '@/forms/LoginForm';
 import Loading from '@/components/Loading';
 import AuthModule from '@/modules/AuthModule';
+import mixpanel from 'mixpanel-browser';
 
 const LoginPage = () => {
   const translate = useLanguage();
@@ -21,6 +22,7 @@ const LoginPage = () => {
 
   const dispatch = useDispatch();
   const onFinish = (values) => {
+    mixpanel.track('Login initiated');
     dispatch(login({ loginData: values }));
   };
 

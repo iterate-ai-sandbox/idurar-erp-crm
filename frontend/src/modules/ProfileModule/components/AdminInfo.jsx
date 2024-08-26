@@ -12,6 +12,7 @@ import { selectCurrentAdmin } from '@/redux/auth/selectors';
 
 import useLanguage from '@/locale/useLanguage';
 import { FILE_BASE_URL } from '@/config/serverApiConfig';
+import mixpanel from 'mixpanel-browser';
 
 const AdminInfo = ({ config }) => {
   const translate = useLanguage();
@@ -31,6 +32,7 @@ const AdminInfo = ({ config }) => {
           <Button
             key={`${uniqueId()}`}
             onClick={() => {
+              mixpanel.track('Edit Profile Clicked');
               updatePanel.open();
             }}
             type="primary"
@@ -87,7 +89,10 @@ const AdminInfo = ({ config }) => {
         key={`${uniqueId()}`}
         icon={<LogoutOutlined />}
         className="right"
-        onClick={() => navigate('/logout')}
+        onClick={() => {
+          mixpanel.track('Logout Clicked');
+          navigate('/logout');
+        }}
       >
         {translate('Logout')}
       </Button>

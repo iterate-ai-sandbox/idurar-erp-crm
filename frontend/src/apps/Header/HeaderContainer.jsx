@@ -15,6 +15,7 @@ import useLanguage from '@/locale/useLanguage';
 import UpgradeButton from './UpgradeButton';
 
 import { selectLangDirection } from '@/redux/translate/selectors';
+import mixpanel from 'mixpanel-browser';
 
 export default function HeaderContent() {
   const currentAdmin = useSelector(selectCurrentAdmin);
@@ -25,7 +26,13 @@ export default function HeaderContent() {
   const ProfileDropdown = () => {
     const navigate = useNavigate();
     return (
-      <div className="profileDropdown" onClick={() => navigate('/profile')}>
+      <div
+        className="profileDropdown"
+        onClick={() => {
+          navigate('/profile');
+          console.log('Profile');
+        }}
+      >
         <Avatar
           size="large"
           className="last"
@@ -109,6 +116,9 @@ export default function HeaderContent() {
         {/* <Badge dot> */}
         <Avatar
           className="last"
+          onClick={() => {
+            mixpanel.track('Profile Clicked');
+          }}
           src={currentAdmin?.photo ? FILE_BASE_URL + currentAdmin?.photo : undefined}
           style={{
             color: '#f56a00',
