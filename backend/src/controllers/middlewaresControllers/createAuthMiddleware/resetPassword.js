@@ -113,13 +113,17 @@ const resetPassword = async (req, res, { userModel }) => {
     return res
       .status(200)
       .cookie('token', token, {
+        // maxAge: 24 * 60 * 60 * 1000,
+        // sameSite: 'Lax',
+        // httpOnly: true,
+        // secure: false,
+        // domain: req.hostname,
+        // path: '/',
+        // Partitioned: true,
         maxAge: 24 * 60 * 60 * 1000,
-        sameSite: 'Lax',
-        httpOnly: true,
-        secure: false,
-        domain: req.hostname,
-        path: '/',
-        Partitioned: true,
+        sameSite: 'none',
+        httpOnly: false,
+        secure: true,
       })
       .json({
         success: true,
