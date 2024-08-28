@@ -20,7 +20,11 @@ const app = express();
 
 app.use(
   cors({
-    origin: ['http://localhost:3000',"http://localhost:4173"],
+    origin: [
+      'http://localhost:3000',
+      'http://localhost:4173',
+      'https://iterate-ai-sandbox-idurar-erp-crm-test.iterate-ai.com',
+    ],
     methods: ['POST', 'GET', 'PATCH', 'DELETE'],
 
     credentials: true,
